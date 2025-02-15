@@ -16,6 +16,12 @@ def stu_list(request):
     print("json_data=",json_data)
     return HttpResponse(json_data,content_type='application/json')
 
-
+def stu_detail(request,pk):
+    user=Student.objects.get(id=pk)
+    serializer=Stu_serializers(user)
+    print("serializer=", serializer)
+    print(serializer.data)
+    #frist argument of JsonResponse should be a dict, otherwise set safe=False
+    return JsonResponse(serializer.data,safe=False)
 
 # Create your views here.
